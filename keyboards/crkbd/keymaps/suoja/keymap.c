@@ -33,10 +33,7 @@ const uint32_t PROGMEM unicode_map[] = {
 
 // Turn of the power LED on Liatris
 void keyboard_pre_init_user(void) {
-    // Set our LED pin as output
     setPinOutput(24);
-    // Turn the LED off
-    // (Due to technical reasons, high is off and low is on)
     writePinHigh(24);
 }
 
@@ -45,11 +42,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------------------------.                    ,-----------------------------------------------------------------------.
       KC_GRAVE,    KC_B,       KC_Y,       KC_O,       KC_U,      KC_QUOTE,                       KC_SEMICOLON,   KC_L,      KC_D,       KC_W,      KC_V,    KC_Z,
   //|-----------+-----------+-----------+-----------+-----------+-----------|                    |-----------+-----------+-----------+-----------+-----------+-----------|
-      LALT_T(KC_TAB),  LT(2,KC_C),    LT(1,KC_I),  LCTL_T(KC_E),    LGUI_T(KC_A),    KC_COMMA,                         KC_DOT,    KC_H,    KC_T,    KC_S, LT(3,KC_N), KC_Q,
+      LALT_T(KC_TAB),  LT(4,KC_C),    LCTL_T(KC_I),  LT(2,KC_E),    LT(1,KC_A),    KC_COMMA,                         KC_DOT,    KC_H,    KC_T,    KC_S, LT(3,KC_N), KC_Q,
   //|-----------+-----------+-----------+-----------+-----------+-----------|                    |-----------+-----------+-----------+-----------+-----------+-----------|
     KC_ESC,    KC_G,    KC_X,    KC_J,    KC_K,   KC_MINUS,                         KC_SLASH,    KC_R, KC_M,  KC_F, KC_P,  KC_ESC,
   //|-----------+-----------+-----------+-----------+-----------+-----------|                    |-----------+-----------+-----------+-----------+-----------+-----------|
-                                                XP(ae, AE), LSFT_T(KC_BSPC),  KC_ESC,     KC_ENT,   LCTL_T(KC_SPC), XP(oe, OE)
+                                                XP(ae, AE), LSFT_T(KC_BSPC),  KC_ESC,     KC_ENT,   LGUI_T(KC_SPC), XP(oe, OE)
                                                         //`--------------------------'  `--------------------------'
   ),
 
@@ -84,6 +81,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_LEFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         XXXXXXX, XXXXXXX, XXXXXXX,  KC_DOWN, KC_UP, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
+                                         XXXXXXX, _______,  _______,     _______, _______, XXXXXXX
+                                      //`--------------------------'  `--------------------------'
+  ),
+
+    [4] = LAYOUT_split_3x6_3(
+  //,-----------------------------------------------------.                    ,-----------------------------------------------------.
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, LCTL(KC_WH_U), KC_BRIU, KC_VOLU, XXXXXXX, XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX,  LCTL(KC_WH_D), KC_BRID, KC_VOLD, XXXXXXX, XXXXXXX,
+  //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
+    XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                          XXXXXXX, _______,  _______,     _______, _______, XXXXXXX
                                       //`--------------------------'  `--------------------------'
