@@ -17,6 +17,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 #include QMK_KEYBOARD_H
+#include "ocean_dream.h"
+
 enum unicode_names {
     ae,
     AE,
@@ -114,3 +116,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                         //`--------------------------'  `--------------------------'
   ),
 };
+
+#ifdef OLED_ENABLE
+
+    oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+        return OLED_ROTATION_270;
+    }
+
+    bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+        switch (keycode) {
+            case KC_LCTL:
+            case KC_RCTL:
+
+    #ifdef OCEAN_DREAM_ENABLE
+            is_calm = (record->event.pressed) ? true : false;
+    #endif
+                break;
+        }
+        return true;
+    }
+
+    bool oled_task_user(void) {
+    if (!is_keyboard_master()) {
+        #    ifdef OCEAN_DREAM_ENABLE
+            render_stars();
+        #    endif
+            }
+
+        return false;
+    }
+#endif
