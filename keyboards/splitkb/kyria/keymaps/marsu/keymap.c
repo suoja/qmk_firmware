@@ -26,7 +26,6 @@ enum layers {
 
 // Aliases for readability
 #define QWERTY   DF(_QWERTY)
-#define NUM      MO(_NUM)
 #define NAV      MO(_NAV)
 
 #define CTL_ESC  MT(MOD_LCTL, KC_ESC)
@@ -56,9 +55,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_QWERTY] = LAYOUT(
     RGB_HUI  , KC_Q ,  KC_W   ,  KC_E  ,   KC_R ,   KC_T ,                                                       KC_Y,   KC_U ,  KC_I ,   KC_O ,  KC_P , RALT(KC_2),
-    KC_TAB , KC_A ,  KC_S   ,  LT(NAV, KC_D)  ,   LT( NUM, KC_F) ,   KC_G ,                                    KC_H,   KC_J ,  KC_K ,   KC_L ,KC_SCLN,CTL_QUOT,
+    KC_TAB , KC_A ,  KC_S   ,  LT(NAV, KC_D)  ,   KC_F ,   KC_G ,                                    KC_H,   KC_J ,  KC_K ,   KC_L ,KC_SCLN,CTL_QUOT,
     RGB_HUD , KC_Z ,  KC_X   ,  KC_C  ,   KC_V ,   KC_B , XXXXXXX,XXXXXXX,                    XXXXXXX, XXXXXXX, KC_N,   KC_M ,KC_COMM, KC_DOT ,KC_SLSH, XXXXXXX,
-    RGB_HUI, KC_LGUI, LSFT_T(KC_SPC), LCTL_T(KC_ESC) , TG(NAV)                                            , NUM , KC_ENT ,KC_BSPC, KC_RGUI, RGB_M_P
+    XXXXXXX, KC_LGUI, LSFT_T(KC_SPC), LCTL_T(KC_ESC) , TG(NAV)                                            , XXXXXXX , KC_ENT ,KC_BSPC, KC_DEL, XXXXXXX
     ),
 
 
@@ -127,9 +126,6 @@ bool oled_task_user(void) {
             case _QWERTY:
                 oled_write_P(PSTR("QWERTY\n"), false);
                 break;
-            case _NUM:
-                oled_write_P(PSTR("Numerot\n"), false);
-                break;
             case _NAV:
                 oled_write_P(PSTR("Nuoli\n"), false);
                 break;
@@ -139,7 +135,6 @@ bool oled_task_user(void) {
 
         // Write host Keyboard LED Status to OLEDs
         led_t led_usb_state = host_keyboard_led_state();
-        oled_write_P(led_usb_state.num_lock    ? PSTR("NUMLCK ") : PSTR("       "), false);
         oled_write_P(led_usb_state.caps_lock   ? PSTR("CAPLCK ") : PSTR("       "), false);
         oled_write_P(led_usb_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false);
     } else {
